@@ -8,8 +8,7 @@ HeaderForm {
     }
     // signal taskListClicked
     tasksbutton.onClicked: {
-//        console.log("tasksbutton Pressed")
-//        taskListClicked()
+
 navigateToTasks()
 
     }

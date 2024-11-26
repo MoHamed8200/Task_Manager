@@ -5,8 +5,7 @@ DashboardViewForm {
 
     // button.onClicked: console.log("Button Pressed")
     onTaskListClicked: {
-        // stackView.push(TaskListView)
-    //     console.log("***************")
+
     }
 
 }

@@ -1,26 +1,41 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.LocalStorage  as Sql
+import DatabaseModule 1.0 // Import the `database` class
 
 Item {
-
+  Database {
+        id: databaseInstance
+    }
     property ListModel taskModel: ListModel {}
-    function removeTaskByIndex(index) {
-          if (index >= 0 && index < taskModel.count) {
-              var taskToRemove = taskModel.get(index).taskName;
+    // function removeTaskByIndex(index) {
+    //       if (index >= 0 && index < taskModel.count) {
+    //           var taskToRemove = taskModel.get(index).taskName;
 
-              taskModel.remove(index);
+    //           taskModel.remove(index);
 
-              var db = Sql.LocalStorage.openDatabaseSync("StickyNotesDB", "1.0", "The Sticky Notes Database", 1000000);
+    //           var db = Sql.LocalStorage.openDatabaseSync("StickyNotesDB", "1.0", "The Sticky Notes Database", 1000000);
 
-              db.transaction(function(tx) {
-                  tx.executeSql('DELETE FROM Tasks WHERE name = ?', [taskToRemove]);
-              });
+    //           db.transaction(function(tx) {
+    //               tx.executeSql('DELETE FROM Tasks WHERE name = ?', [taskToRemove]);
+    //           });
 
-              console.log("Task removed from database and model: " + taskToRemove);
-          }
-      }
+    //           console.log("Task removed from database and model: " + taskToRemove);
+    //       }
+    //   }
+function removeTaskByIndex(index) {
+        if (index >= 0 && index < taskModel.count) {
+            const taskId = taskModel.get(index).taskId;
 
+            // Remove from the database
+            if (databaseInstance.deleteTask(taskId)) {
+                taskModel.remove(index);
+                console.log("Task removed from database and model: " + taskId);
+            } else {
+                console.log("Failed to remove task with ID: " + taskId);
+            }
+        }
+    }
 
 
             ListView {
@@ -33,30 +48,7 @@ Item {
                     width: parent.width
                     height: 50
 
-                    // Rectangle {
-                    //     width: parent.width
-                    //     height: 50
-                    //     color: "#FFFFFF"
-                    //     border.color: "#E0E0E0"
-                    //     radius: 8
 
-                    //     Row {
-                    //         anchors.fill: parent
-                    //         spacing: 20
-                    //         Text { text: model.taskId+"   "+model.taskName+"   "+model.deadline; font.pixelSize: 16 }
-
-
-
-                    //         Button {
-                    //             id:deletetask
-                    //             text: "Delete"
-                    //             anchors.right: parent.right
-                    //             onClicked:    removeTaskByIndex(index)
-
-
-                    //         }
-                    //     }
-                    // }
 
                     Rectangle {
                         width: parent.width
@@ -108,13 +100,6 @@ Item {
                                 font.bold: true
                                 font.pixelSize: 14
 
-                                // Hover effect for the delete button
-                                // MouseArea {
-                                //     anchors.fill: parent
-                                //     onClicked: deleteTask.onClicked
-                                //     onReleased: deleteTask.background.color = "#FF6347"
-                                //     onPressed: deleteTask.background.color = "#E74C3C"
-                                // }
                             }
                         }
                     }

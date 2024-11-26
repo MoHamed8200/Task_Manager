@@ -7,10 +7,7 @@ Item {
     id: taskListView
 
     property ListModel taskModel1: ListModel {
-        // ListElement { taskName: "Buy groceries" }
-        // ListElement { taskName: "Finish project report" }
-        // ListElement { taskName: "Call John" }
-        // ListElement { taskName: "Clean the house" }
+
     }
 
     property alias addbutton: addbutton

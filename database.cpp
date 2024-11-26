@@ -1,8 +1,4 @@
-// #include "database.h"
 
-// Database::Database(QObject *parent)
-//     : QObject{parent}
-// {}
 #include "database.h"
 #include <QSqlQuery>
 #include <QVariantList>
@@ -55,4 +51,12 @@ QVariantList Database::getTasks()
         tasks.append(task);
     }
     return tasks;
+}
+
+bool Database::deleteTask(int taskId)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Tasks WHERE id = :id");
+    query.bindValue(":id", taskId);
+    return query.exec();
 }

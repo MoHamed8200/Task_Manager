@@ -1,59 +1,4 @@
 
-// import QtQuick
-// import QtQuick.Controls
-// import "./../components"
-// Item {
-//     id: addTaskView
-//     // width: parent.width
-//     // height: parent.height
-//     // color: "#F0F0F0"
-
-//     property alias button: button
-//     property alias taskNameField: taskNameField
-
-//     Column {
-//         anchors.fill: parent
-//         spacing: 15
-
-//         Row{
-//         height: 30
-
-//         TextField {
-//             id: taskNameField
-//             placeholderText: "Enter task name"
-//             // width: parent.width /2
-//             anchors.left: parent.left
-//             // Layout.margins: 20
-//         }
-
-//         KSDatePicker {
-//             id: dueDatePicker
-//             // width: parent.width /2
-//             selected_date: new Date()
-//             anchors.right: parent.right
-//             // Layout.margins: 20
-//         }
-//         }
-//         Row{
-
-
-//         // Save Button
-//         Button {
-//             id: button
-//             text: "Save Task"
-//             // Layout.margins: 20
-//             // onClicked: {
-//             //     if (taskNameField.text.trim().length > 0) {
-//             //         taskAdded(taskNameField.text, dueDatePicker.currentDate.toLocaleDateString())
-//             //         stackView.pop() // Return to the previous view after adding the task
-//             //     } else {
-//             //         console.log("Task name is required!")
-//             //     }
-//             // }
-//         }
-//         }
-//     }
-// }
 
 import QtQuick
 import QtQuick.Controls
@@ -61,8 +6,7 @@ import "./../components"
 import QtQuick.Layouts
 Item {
     id: addTaskView
-    // width: parent.width
-    // height: parent.height
+
 
     property alias button: button
     property alias taskNameField: taskNameField
